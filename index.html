@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAT MCQ SEE Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="welcomeScreen" class="screen active">
+        <div class="container">
+            <div class="welcome-content">
+                <h1 class="welcome-title">MAT MCQ SEE Quiz</h1>
+                <p class="welcome-subtitle">Comprehensive Assessment from 5 Units </p>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon">📘</div>
+                        <div class="info-text">5 Chapters</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🎲</div>
+                        <div class="info-text">20 Random Each Attempt</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⏰</div>
+                        <div class="info-text">15 Minutes</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🔀</div>
+                        <div class="info-text">Shuffled Options</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentName" class="form-label">Enter Your Name</label>
+                    <input type="text" id="studentName" class="form-control" placeholder="Your Name" required>
+                </div>
+
+                <button id="startQuizBtn" class="btn btn--primary btn--lg btn--full-width">
+                    Begin MCQ Quiz
+                </button>
+
+                <div class="footer-credit">
+                    Built with ❤️ by <span class="highlight">Samridh Shetty</span>
+                </div>
+
+                <button id="adminLoginBtn" class="admin-link">Admin Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="quizScreen" class="screen">
+        <div class="container">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span id="questionCounter">Question 1 of 100</span>
+                    <div class="randomization-indicators">
+                        <span class="indicator">🎲 Random Selection</span>
+                        <span class="indicator">🔀 Options Shuffled</span>
+                    </div>
+                </div>
+                <div class="timer-container">
+                    <span id="timer">60:00</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressBar" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div id="questionText" class="question-text"></div>
+                <div id="optionsContainer" class="options-container"></div>
+            </div>
+
+            <div class="quiz-navigation">
+                <button id="prevBtn" class="btn btn--outline">← Previous</button>
+                <button id="nextBtn" class="btn btn--primary">Next →</button>
+                <button id="submitBtn" class="btn btn--primary submit-btn hidden">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultsScreen" class="screen">
+        <div class="container">
+            <div class="results-content">
+                <h2 class="results-title">Assessment Complete</h2>
+                <div class="student-name-display" id="studentNameDisplay"></div>
+                
+                <div class="score-circle">
+                    <div class="score-inner">
+                        <span id="scorePercentage">0%</span>
+                        <span class="score-label">Score</span>
+                    </div>
+                </div>
+
+                <div class="results-stats">
+                    <div class="stat-card correct">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="correctCount">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card wrong">
+                        <div class="stat-icon">❌</div>
+                        <div class="stat-value" id="wrongCount">0</div>
+                        <div class="stat-label">Wrong</div>
+                    </div>
+                    <div class="stat-card unanswered">
+                        <div class="stat-icon">❓</div>
+                        <div class="stat-value" id="unansweredCount">0</div>
+                        <div class="stat-label">Unanswered</div>
+                    </div>
+                </div>
+
+                <div class="time-taken">
+                    <span>Time Taken: <span id="timeTaken">0:00</span></span>
+                </div>
+
+                <div class="results-actions">
+                    <button id="reviewAnswersBtn" class="btn btn--primary">Review Answers</button>
+                    <button id="newQuizBtn" class="btn btn--outline">New Random Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reviewScreen" class="screen">
+        <div class="container">
+            <div class="review-header">
+                <h2>MAT MCQ SEE Answer Review</h2>
+                <div class="review-summary">
+                    <span>✅ <span id="reviewCorrectCount">0</span></span>
+                    <span>❌ <span id="reviewWrongCount">0</span></span>
+                    <span>❓ <span id="reviewUnansweredCount">0</span></span>
+                </div>
+            </div>
+
+            <div id="reviewQuestions" class="review-questions"></div>
+
+            <div class="review-actions">
+                <button id="backToResultsBtn" class="btn btn--primary">← Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminScreen" class="screen">
+        <div class="container">
+            <div class="admin-header">
+                <h2>SCR Admin Dashboard</h2>
+                <button id="logoutBtn" class="btn btn--outline">Logout</button>
+            </div>
+
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Correct</th>
+                            <th>Wrong</th>
+                            <th>Unanswered</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <h2>Admin Login</h2>
+            <label>Username</label>
+            <input type="text" id="adminUsername" placeholder="Enter admin username">
+            <label>Password</label>
+            <input type="password" id="adminPassword" placeholder="Enter admin password">
+            <div class="modal-actions">
+              <button id="adminLoginSubmit" class="btn btn--primary">Login</button>
+              <button id="adminModalClose" class="btn btn--outline">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
